@@ -65,6 +65,12 @@ STATIC_FILES = frozenset({
     '/snake168-rail-baccarat.webp',
     '/snake168-rail-casino-roulette.webp',
     '/snake168-rail-slot.webp',
+    '/banner-01.gif',
+    '/banner-02.gif',
+    '/banner-03.gif',
+    '/banner-04.gif',
+    '/banner-05.gif',
+    '/banner-06.gif',
 })
 
 class Handler(SimpleHTTPRequestHandler):
