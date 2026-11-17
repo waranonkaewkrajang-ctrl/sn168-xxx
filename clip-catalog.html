@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="th"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ชอบหี | คลังคลิป</title>
+
 <style>
 body{margin:0;background:#14161d;color:#f4f4f6;font:1rem Inter,system-ui,sans-serif}
 main{width:min(1000px,94vw);margin:3rem auto}
@@ -50,7 +51,7 @@ nav{justify-content:center}
 #stage{border-radius:5px}
 @media(max-width:1023px){ul{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:600px){
-  main{width:calc(100% - 16px);margin-top:.65rem}
+  main{width:calc(100% - 160px);margin:.65rem auto 3rem}
   .site-header{padding-inline:.75rem}
   .header-inner{gap:.5rem}
   .site-header .wordmark{font-size:1.2rem}
@@ -93,13 +94,52 @@ nav{justify-content:center}
 .banner-horizontal img,.floating-banner img{display:block;width:100%;height:auto}
 #watch .player-heading{font-size:1.05rem;margin:.75rem 0 .5rem}
 .watch-player{min-width:0}
-.floating-banner{display:none}
-@media(min-width:901px){
-  .floating-banner{display:grid;position:fixed;top:50%;transform:translateY(-50%);width:min(140px,calc((100vh - 28px)*.28));gap:6px;z-index:4}
-  .floating-banner-left{inset-inline-start:max(30px,calc((100% - 1344px)/2 + 10px))}
-  .floating-banner-right{inset-inline-end:max(30px,calc((100% - 1344px)/2 + 10px))}
-  .floating-banner a{display:block;border-radius:6px;overflow:hidden;aspect-ratio:14/25}
-  .floating-banner img{height:100%;object-fit:contain}
+/* แบนเนอร์ซ้าย-ขวา ลอยและย่อตามขนาดจอ */
+.floating-banner {
+  display: grid;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(70px, 11vw, 160px);
+  gap: 8px;
+  z-index: 4;
+}
+
+.floating-banner-left {
+  left: 6px;
+}
+
+.floating-banner-right {
+  right: 6px;
+}
+
+.floating-banner a {
+  display: block;
+  border-radius: 6px;
+  overflow: hidden;
+  aspect-ratio: 14 / 25;
+}
+
+.floating-banner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 600px) {
+  .floating-banner {
+    width: clamp(65px, 18vw, 90px);
+    gap: 5px;
+  }
+  .floating-banner-left { left: 3px; }
+  .floating-banner-right { right: 3px; }
+  .floating-banner a { border-radius: 5px; }
+}
+
+@media (max-width: 380px) {
+  .floating-banner { width: 58px; }
+  main { width: calc(100% - 136px); }
 }
 .site-banner{width:calc(100% - 24px);margin:1rem auto 0}
 .extra-banners {
@@ -119,7 +159,22 @@ nav{justify-content:center}
 }
 .site-banner a{display:block}
 .floating-banner[hidden]{display:none}
-.close-floating-banner{position:absolute;top:0;right:0;display:grid;place-items:center;width:24px;height:24px;padding:0;border:1px solid #fff8;border-radius:50%;background:#191919ed;color:white;font-size:.75rem;z-index:1}
+.close-floating-banner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: clamp(16px, 2.2vw, 24px);
+  height: clamp(16px, 2.2vw, 24px);
+  padding: 0;
+  border: 1px solid #fff8;
+  border-radius: 50%;
+  background: #191919ed;
+  color: white;
+  font-size: clamp(10px, 1.1vw, 12px);
+  z-index: 1;
+}
 .close-floating-banner:hover,.close-floating-banner:focus-visible{background:#3b3b3b}
 #video-loading{position:absolute;inset:0;display:grid;place-items:center;background:#0005;pointer-events:none;z-index:2}
 #video-loading[hidden]{display:none}
@@ -128,31 +183,8 @@ nav{justify-content:center}
 @media(prefers-reduced-motion:reduce){#video-loading::before{animation-duration:2s}}
 body:not(.is-watch-page) .floating-banner{display:none}
 
-/* แสดงแบนเนอร์ด้านข้างบนมือถือ */
-@media (max-width: 900px) {
-  .floating-banner {
-    display: grid;
-    position: relative;
-    transform: none;
-    width: min(728px, calc(100% - 24px));
-    margin: 10px auto;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
-
-  .floating-banner a {
-    display: block;
-    min-width: 0;
-  }
-
-  .floating-banner img {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-  }
-}
 </style>
+
 <header class="site-header">
   <div class="header-inner">
     <a class="wordmark" href="#" aria-label="ชอบหี หน้าแรก">ชอบหี</a>
