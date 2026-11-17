@@ -71,6 +71,7 @@ STATIC_FILES = frozenset({
     '/banner-04.gif',
     '/banner-05.gif',
     '/banner-06.gif',
+    '/logo.png',
 })
 
 class Handler(SimpleHTTPRequestHandler):
