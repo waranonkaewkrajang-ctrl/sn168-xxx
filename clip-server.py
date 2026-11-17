@@ -57,14 +57,33 @@ def resolve(post):
         raise ValueError('Unexpected stream')
     return stream.geturl()
 
+# the only files served over HTTP; everything else in ROOT (.git, post-index.csv, this script, backups) is 404
+STATIC_FILES = frozenset({
+    '/clip-catalog.html',
+    '/snake168-watch-banner.gif',
+    '/snake168-floating-banner.webp',
+    '/snake168-rail-baccarat.webp',
+    '/snake168-rail-casino-roulette.webp',
+    '/snake168-rail-slot.webp',
+})
+
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(ROOT), **kwargs)
+
+    def do_HEAD(self):
+        if urlsplit(self.path).path not in STATIC_FILES:
+            self.send_error(404)
+            return
+        return super().do_HEAD()
 
     def do_GET(self):
         path = urlsplit(self.path).path
         match = re.fullmatch(r'/(stream|cover)/(\d+)', path)
         if not match:
+            if path not in STATIC_FILES:
+                self.send_error(404)
+                return
             return super().do_GET()
         post = POSTS.get(match[2])
         if not post:
